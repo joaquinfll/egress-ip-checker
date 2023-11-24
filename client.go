@@ -8,12 +8,11 @@ import (
 )
 
 func main() {
-	//logger := slog.FromContext(ctx)
 	os.Setenv("EXTERNAL_URL", "http://127.0.0.1:8080")
 	externalUrl, ok := os.LookupEnv("EXTERNAL_URL")
 
 	jsonHandler := slog.NewJSONHandler(os.Stderr, nil).WithAttrs([]slog.Attr{slog.String("app-version", "v0.0.1"),
-		slog.String("app-name", "egress-ip-checker"),
+		slog.String("app-name", "egress-ip-checker-client"),
 	})
 
 	logger := slog.New(jsonHandler)

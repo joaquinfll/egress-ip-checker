@@ -1,13 +1,15 @@
-FROM registry.access.redhat.com/ubi9/go-toolset:1.20 as builder
+FROM registry.access.redhat.com/ubi9/go-toolset:1.20 AS build
 
 CMD mkdir -p /app/src
 COPY . /app/src
 
-CMD go build -o /app/src/server
+WORKDIR /app/src
+RUN go mod download
+RUN go build -o server ./main.go
 
-FROM registry.access.redhat.com/ubi9/micro:1.20
+FROM registry.access.redhat.com/ubi9-micro:9.3
 
 CMD mkdir -p /app
-COPY --from=builder /app/src/server /app/server
+COPY --from=build /app/src/server /app/server
 
 ENTRYPOINT ["/app/server"]

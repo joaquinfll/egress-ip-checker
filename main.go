@@ -14,7 +14,7 @@ func main() {
 	egressIp, ok := os.LookupEnv("EGRESS_IP")
 
 	jsonHandler := slog.NewJSONHandler(os.Stderr, nil).WithAttrs([]slog.Attr{slog.String("app-version", "v0.0.1"),
-		slog.String("app-name", "egress-ip-checker"),
+		slog.String("app-name", "egress-ip-checker-server"),
 	})
 
 	logger := slog.New(jsonHandler)

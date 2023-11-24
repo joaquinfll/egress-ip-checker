@@ -1,13 +1,15 @@
-FROM registry.access.redhat.com/ubi9/go-toolset:1.20 as builder
+FROM registry.access.redhat.com/ubi9/go-toolset:1.20 AS build
 
 CMD mkdir -p /app/src
 COPY . /app/src
 
-CMD go build -o /app/src/client
+WORKDIR /app/src
+RUN go mod download
+RUN go build -o client ./client.go
 
-FROM registry.access.redhat.com/ubi9/micro:1.20
+FROM registry.access.redhat.com/ubi9-micro:9.3
 
 CMD mkdir -p /app
-COPY --from=builder /app/src/main /app/external-ip-checker
+COPY --from=build /app/src/client /app/client
 
-ENTRYPOINT ["/app/external-ip-checker"]
+ENTRYPOINT ["/app/client"]
