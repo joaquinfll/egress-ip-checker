@@ -5,7 +5,7 @@ USER 10001
 COPY . /app/src
 
 WORKDIR /app/src
-RUN go build -o /app/src/server
+RUN go mod tidy && go build -o /app/src/server
 
 FROM registry.access.redhat.com/ubi9/micro:9.3
 
