@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/go-toolset:1.20 as builder
+FROM registry.access.redhat.com/ubi9/go-toolset:1.20 AS builder
 
 USER 10001
 
@@ -6,7 +6,7 @@ WORKDIR /app/
 RUN mkdir -p /app/src
 COPY . /app/src
 
-RUN go mod download && go build -o /app/src/server
+RUN go build -o /app/src/server
 
 FROM registry.access.redhat.com/ubi9/micro:9.3
 

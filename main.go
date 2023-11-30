@@ -10,7 +10,6 @@ import (
 
 func main() {
 
-	os.Setenv("EGRESS_IP", "127.0.0.1")
 	egressIp, ok := os.LookupEnv("EGRESS_IP")
 
 	jsonHandler := slog.NewJSONHandler(os.Stderr, nil).WithAttrs([]slog.Attr{slog.String("app-version", "v0.0.1"),
