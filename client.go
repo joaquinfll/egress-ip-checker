@@ -8,7 +8,6 @@ import (
 )
 
 func main() {
-	//logger := slog.FromContext(ctx)
 	os.Setenv("EXTERNAL_URL", "http://127.0.0.1:8080")
 	externalUrl, ok := os.LookupEnv("EXTERNAL_URL")
 
