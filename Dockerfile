@@ -5,7 +5,7 @@ COPY . /app/src
 
 CMD go build -o /app/src/server
 
-FROM registry.access.redhat.com/ubi9/micro:9.3
+FROM registry.access.redhat.com/ubi9/ubi-micro:9.3
 
 CMD mkdir -p /app
 COPY --from=builder /app/src/server /app/server
