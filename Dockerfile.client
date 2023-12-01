@@ -4,6 +4,7 @@ USER 1000
 
 COPY . .
 
+RUN chgrp -R root ./src && chmod g+rwX ./src
 RUN go mod tidy && go build -o client client.go
 
 FROM registry.access.redhat.com/ubi9/micro:9.3
