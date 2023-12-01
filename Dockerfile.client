@@ -1,7 +1,6 @@
 FROM registry.access.redhat.com/ubi9/go-toolset:1.20 AS builder
 
-RUN go mod init my_app && \
-    go mod tidy && \
+RUN go mod tidy && \
     go build -o client client.go
 
 FROM registry.access.redhat.com/ubi9/ubi-micro:9.3
