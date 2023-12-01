@@ -2,10 +2,10 @@ FROM registry.access.redhat.com/ubi9/go-toolset:1.20 AS builder
 
 USER 1000
 
-ARG GOPATH=/workspace/output/go
+ARG GOPATH=/opt/app-root/go
 ENV GOPATH=${GOPATH}
 
-WORKDIR /workspace/output
+RUN ls -larth .
 RUN go mod tidy && go build -o server main.go
 
 FROM registry.access.redhat.com/ubi9/ubi-micro:9.3
