@@ -1,6 +1,7 @@
 FROM registry.access.redhat.com/ubi9/go-toolset:1.20 AS builder
 
-RUN go mod tidy && \
+RUN go mod init egress-ip-checker && \
+    go mod tidy && \
     go build -o server main.go
 
 FROM registry.access.redhat.com/ubi9/ubi-micro:9.3
