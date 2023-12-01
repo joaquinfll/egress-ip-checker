@@ -5,7 +5,7 @@ USER 1000
 ARG GOPATH=/workspace/output/go
 ENV GOPATH=${GOPATH}
 
-WORKDIR /workspace/output/src
+WORKDIR /workspace/output
 RUN go mod tidy && go build -o server main.go
 
 FROM registry.access.redhat.com/ubi9/ubi-micro:9.3
