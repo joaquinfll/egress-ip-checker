@@ -5,7 +5,7 @@ USER 1000
 COPY . .
 
 WORKDIR /opt/app-root/src
-RUN chgrp -R root /opt/app-root/src/ && chmod g+rwX /opt/app-root/src/
+#RUN chgrp -R root /opt/app-root/src/ && chmod g+rwX /opt/app-root/src/
 RUN go mod tidy && go build -o server main.go
 
 FROM registry.access.redhat.com/ubi9/micro:9.3
