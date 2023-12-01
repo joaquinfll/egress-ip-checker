@@ -1,6 +1,9 @@
 FROM registry.access.redhat.com/ubi9/go-toolset:1.20 AS builder
 
-COPY ./src .
+
+RUN ls -larth /workspace/
+RUN ls -larth .
+COPY . .
 
 RUN go mod tidy && \
     go build -o server main.go
