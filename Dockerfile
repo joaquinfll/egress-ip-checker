@@ -2,17 +2,17 @@ FROM registry.access.redhat.com/ubi9/go-toolset:1.20 AS builder
 
 USER 1000
 
-COPY . .
+ARG GOPATH=/workspace/output/go
+ENV GOPATH=$(GOPATH)
 
-WORKDIR /opt/app-root/src
-#RUN chgrp -R root /opt/app-root/src/ && chmod g+rwX /opt/app-root/src/
+WORKDIR /workspace/output/src
 RUN go mod tidy && go build -o server main.go
 
-FROM registry.access.redhat.com/ubi9/micro:9.3
+FROM registry.access.redhat.com/ubi9/ubi-micro:9.3
 
 USER 1000
 
 WORKDIR /app
-COPY --from=builder /opt/app-root/src/server /app/server
+COPY --from=builder /workspace/output/src/server /app/server
 
 ENTRYPOINT ["/app/server"]

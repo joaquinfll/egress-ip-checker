@@ -2,13 +2,13 @@ FROM registry.access.redhat.com/ubi9/go-toolset:1.20 AS builder
 
 USER 1000
 
-WORKDIR /workspace/output/src
-COPY . .
+ARG GOPATH=/workspace/output/go
+ENV GOPATH=$(GOPATH)
 
-#RUN chgrp -R root /opt/app-root/src/ && chmod g+rwX /opt/app-root/src/
+WORKDIR /workspace/output/src
 RUN go mod tidy && go build -o client client.go
 
-FROM registry.access.redhat.com/ubi9/micro:9.3
+FROM registry.access.redhat.com/ubi9/ubi-micro:9.3
 
 USER 1000
 
