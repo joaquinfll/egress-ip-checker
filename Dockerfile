@@ -1,7 +1,7 @@
 FROM registry.access.redhat.com/ubi9/go-toolset:1.20 AS builder
 
 
-RUN ls -larth /workspace/
+RUN ls -larth /
 RUN ls -larth .
 COPY . .
 
