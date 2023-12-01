@@ -2,9 +2,9 @@ FROM registry.access.redhat.com/ubi9/go-toolset:1.20 AS builder
 
 USER 1000
 
+WORKDIR /workspace/output/src
 COPY . .
 
-WORKDIR /opt/app-root/src
 #RUN chgrp -R root /opt/app-root/src/ && chmod g+rwX /opt/app-root/src/
 RUN go mod tidy && go build -o client client.go
 
@@ -13,6 +13,6 @@ FROM registry.access.redhat.com/ubi9/micro:9.3
 USER 1000
 
 WORKDIR /app
-COPY --from=builder /opt/app-root/src/client /app/client
+COPY --from=builder /workspace/output/src/client /app/client
 
 ENTRYPOINT ["/app/client"]
