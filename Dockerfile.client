@@ -1,6 +1,6 @@
 FROM registry.access.redhat.com/ubi9/go-toolset:1.20 AS builder
 
-RUN go mod init egress-ip-checker && \
+RUN go mod init main && \
     go mod tidy && \
     go build -o client client.go
 
